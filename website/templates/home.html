@@ -2,6 +2,31 @@
 
 {% block content %}
 
-<h1>Hello World!</h1>
+<div class="col-md-6 offset-md-3">  <!--bootstrap code to center text-->
+
+{% if user.is_authenticated %}  <!--make sure user is logged in-->
+
+<h1>YO WORLD, logged in page! </h1>
+
+{% else %}
+<h1>Login</h1>
+<br/>
+
+<form method="POST" action="{% url 'home' %}"> <!--form type post because when click login it posts to server-->
+    {% csrf_token %}  <!--cross site request forgery token-->
+    <form>
+        <div class="mb-3">
+          <input type="text" class="form-control" name = "username" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" name = "password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">Login to the page bruv</button>
+      </form>
+</form>
+
+</div>
+
+{% endif %}
 
 {% endblock %}
